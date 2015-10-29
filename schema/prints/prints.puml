@@ -1,0 +1,162 @@
+@startuml
+
+left to right direction
+
+class druh_tisku{
+id_druh: int
+druh_t: char(X)
+nazev_druh: char(X)
+__
+}
+
+class typ_zakon{
+id_navrh: int
+druh_navrhovatele: char(X)
+__
+}
+
+class typ_stavu{
+id_typ: int
+popis_stavu: char(X)
+__
+}
+
+class stavy{
+id_stav: int
+popis: char(X)
+lhuta: int
+lhuta_where: int
+__
+}
+
+class typ_akce{
+id_akce: int
+popis_akce: char(X)
+__
+}
+
+class prechody{
+id_prechod: int
+odkud: int
+kam: int
+id_akce: int
+typ_prechodu: int
+__
+}
+
+class tisky {
+id_tisk: int
+id_druh: int
+id_stav: int
+ct: int
+cislo_za: int
+id_navrh: int
+id_org: int
+id_org_obd: int
+id_osoba: int
+navrhovatel: char(X)
+nazev_tisku: char(X)
+predlozeno: datum
+rozeslano: datum
+dal: datetime(year to minute)
+tech_nos_dat: date
+uplny_nazev_tisku: char(X)
+zm_lhuty: int
+lhuta: int
+rj: int
+t_url: char(X)
+is_eu: int
+roz: datetime(year to minute)
+is_sdv: int
+status: int
+__
+}
+
+class hist{
+id_hist: int
+datum: datetime(year to minute)
+id_hlas: int
+id_bod: int
+schuze: int
+usnes_ps: int
+orgv_id_posl: int
+ps_id_posl: int
+orgv_p_usn: int
+zaver_publik: date
+zaver_sb_castka: int
+zaver_sb_cislo: int
+poznamka: char(X)
+__
+}
+
+class hist_vybory{
+id_tisku: int
+id_organ: int
+typ: int
+id_hist: int
+id_posl: int
+poradi: int
+__
+}
+
+class vysledek{
+id_vysledek: int
+druh_vysledek: char(X)
+__
+}
+
+class tisky_za{
+id_tisk: int
+cislo_za: int
+id_hist: int
+id_druh: int
+nazev_za: char(X)
+uplny_nazev_zua: char(X)
+rozeslano: datetime(year to minute)
+id_org: int
+usn_vybor: int
+t_url: char(X)
+id_vysledek: int
+cislo_za_post: int
+sort_it: int
+roz: datetime(year to minute)
+status: int
+__
+}
+
+class predkladatel{
+id_tisk: int
+poradi: int
+typ: int
+__
+}
+
+stavy --> "id_typ: int" typ_stavu
+stavy --> "id_druh: int" druh_tisku
+prechody --> "odkud id_stav: int" stavy
+prechody --> "kam id_stav: int" stavy
+prechody --> "id_akce: int" typ_akce
+tisky --> "id_druh: int" druh_tisku
+tisky --> "id_stav: int" stavy
+tisky --> "id_typ: int" typ_zakon
+tisky --> "id_org: int" organy
+tisky --> "id_org_obd:int" organy
+tisky --> "id_osoba: int" osoba
+hist --> "id_tisk: int" tisky
+hist --> "id_hlasovani: int" hl_hlasovani
+hist --> "id_prechod: int" prechody
+hist --> "id_bod": int i_bod_schuze
+hist --> "orgv_id_pos: int" poslanec
+hist --> "ps_id_posl: int" poslanec
+tisky_za --> "id_hist: int" hist_vybory
+tisky_za --> "id_druh: int" druh_tisku
+tisky_za --> "id_org: int" hist_vybory
+tisky_za --> "id_posl: int" poslanec
+tisky_za --> "id_vysledek: int" vysledek
+predkladatel --> "id_osoba: int" osoba
+
+class osoba{
+}
+note right: Triedy bez atribútov sú z iných častí
+
+@enduml
