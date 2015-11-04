@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="11.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>210</x>
+      <y>30</y>
+      <w>210</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>_interpelation_
+--
+id_interp_result: int
+id_interp_ballot: int
+id_steno: int
+id_deputy: int
+id_minister: int
+--
+id_interp: int
+
+priority_by_ballot: int
+priority_by_author: int
+long_text: char(X)
+short_text: char(X)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Interface</type>
+    <coordinates>
+      <x>40</x>
+      <y>50</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>steno
+(stenozaznam)
+--
+id_steno
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>80</x>
+      <y>30</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;130;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Interface</type>
+    <coordinates>
+      <x>50</x>
+      <y>150</y>
+      <w>100</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>people
+(osoba)
+--
+id_deputy
+id_minister
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>80</x>
+      <y>130</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;130;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>310</x>
+      <y>280</y>
+      <w>210</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>_interp_result_
+--
+id_interp_result: int
+priority: int
+text: char(X)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>480</x>
+      <y>30</y>
+      <w>210</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>_interp_ballot_
+--
+id_org: int
+id_session: int
+id_session_item: int
+--
+id_interp_ballot: int
+time: datetime
+meeting: int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>670</x>
+      <y>300</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>interp_ballot.type
+'M' = minister
+'P' = prime minister
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Interface</type>
+    <coordinates>
+      <x>710</x>
+      <y>50</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>session
+(i_schuze)
+--
+id_session
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Interface</type>
+    <coordinates>
+      <x>710</x>
+      <y>150</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>session_item
+(i_bod_schuze)
+--
+id_session
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Interface</type>
+    <coordinates>
+      <x>540</x>
+      <y>210</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>organs
+(organy)
+--
+id_steno
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>220</x>
+      <y>210</y>
+      <w>110</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>90;100;30;100;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>390</x>
+      <y>30</y>
+      <w>110</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>90;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>570</x>
+      <y>140</y>
+      <w>50</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;70;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>660</x>
+      <y>130</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>100;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>660</x>
+      <y>30</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>100;30;30;30</additional_attributes>
+  </element>
+</diagram>
