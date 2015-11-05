@@ -3,6 +3,9 @@ require_relative '../model/Person'
 require_relative '../model/Organ'
 require_relative '../model/Function'
 require_relative '../model/Deputy'
+require_relative '../model/Meeting'
+require_relative '../model/MeetingStatus'
+require_relative '../model/PointMeeting'
 
 class Parser
   
@@ -125,6 +128,90 @@ class Parser
 
   end
 
+  def self.parseMeeting(file_path)
+    header = ['id', 'org', 'meeting', 'from_meeting', 'to_meeting', 'actualization', 'invitation']   
+
+    csv =  SmarterCSV.process(File.open(file_path, 'r:iso-8859-2:utf-8'), {
+      :headers_in_file => false, 
+      :col_sep => "|", 
+      :user_provided_headers => header
+    })
+
+    meetings = [] 
+    
+    csv.each do |row|
+      m = Meeting.new
+      m.id = row[:id]
+      m.org = row[:org]
+      m.meeting = row[:meeting]
+      m.from_meeting = row[:from_meeting]
+      m.to_meeting = row[:to_meeting]
+      m.actualization = row[:actualization]
+      m.invitation = row[:invitation]
+
+      meetings << m     
+    end  
+  end
+
+  def self.parseMeetingStatus(file_path)
+    header = ['meeting', 'status', 'type', 'text_dt', 'text_st', 'tm_line']   
+
+    csv =  SmarterCSV.process(File.open(file_path, 'r:iso-8859-2:utf-8'), {
+      :headers_in_file => false, 
+      :col_sep => "|", 
+      :user_provided_headers => header
+    })
+
+    meetingStatuses = [] 
+    
+    csv.each do |row|
+      ms = MeetingStatus.new  
+      ms.meeting = row[:meeting]
+      ms.status = row[:status]
+      ms.type = row[:type]
+      ms.text_dt = row[:text_dt]
+      ms.text_st = row[:text_st]
+      ms.tm_line = row[:tm_line]
+
+      meetingStatuses << ms     
+    end  
+  end
+
+  def self.parsePointMeeting(file_path)
+    header = ['id', 'meeting', 'print', 'type', 'point', 'full_name', 'full_end',
+              'note', 'description', 'invitation', 'rj', 'note2', 'type_point', 
+              'sd_document', 'shortcut']   
+
+    csv =  SmarterCSV.process(File.open(file_path, 'r:iso-8859-2:utf-8'), {
+      :headers_in_file => false, 
+      :col_sep => "|", 
+      :user_provided_headers => header
+    })
+
+    pointMeeting = [] 
+    
+    csv.each do |row|
+      pm = PointMeeting.new  
+      pm.id = row[:id]
+      pm.meeting = row[:meeting]
+      pm.print = row[:print]
+      pm.type = row[:type]
+      pm.point = row[:point]
+      pm.full_name = row[:full_name]
+      pm.full_end = row[:full_end]
+      pm.note = row[:note]
+      pm.description = row[:description]
+      pm.invitation = row[:invitation]
+      pm.rj = row[:rj]
+      pm.note2 = row[:full_name]
+      pm.type_point = row[:type_point]
+      pm.sd_document = row[:sd_document]
+      pm.shortcut = row[:shortcut]
+
+      pointMeeting << pm     
+    end  
+  end
+
 end
 
 
@@ -132,4 +219,7 @@ Parser.parsePersons('data/osoby.unl')
 Parser.parseOrgans('data/organy.unl')
 Parser.parseDeputies('data/poslanec.unl')
 Parser.parseFunctions('data/funkce.unl')
+Parser.parseMeeting('data/schuze.unl')
+Parser.parseMeetingStatus('data/schuze_stav.unl')
+Parser.parsePointMeeting'data/bod_schuze.unl')
 # TODO resolve binding - for example: a deputy has reference to a person, but now is stored id of person
