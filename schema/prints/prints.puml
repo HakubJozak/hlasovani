@@ -2,161 +2,147 @@
 
 left to right direction
 
-class druh_tisku{
-id_druh: int
-druh_t: char(X)
-nazev_druh: char(X)
+class Print {
+- id: int
+- type: PrintType
+- state: PrintState
+- number: int
+- number_after_slash: int
+- name: string
+- name_full: string
+
+- law_proposer_type: string
+- authority: Authority
+- authority_election_term: Authority
+- proposers: Proposer[]
+
+- date_of_propose: Date
+- date_of_deliver: DateTime
+- date_of_next_discussion: DateTime
+- discussion_date_change: int
+- is_fast_proposal: boolean
+- is_eu: boolean
+- with_wote_of_no_confidence: boolean
+
+- date_of_e_version: Date
+- url: string
+
+- state: int
 __
 }
 
-class typ_zakon{
-id_navrh: int
-druh_navrhovatele: char(X)
-__
+class PrintType {
+- id: int
+- name: string
+- name_abbr: string
 }
 
-class typ_stavu{
-id_typ: int
-popis_stavu: char(X)
-__
+class PrintState{
+- id: int
+- state_type: PrintStateType
+- print_type: PrintType
+- description: string
+- days_until_next_discussion: int
 }
 
-class stavy{
-id_stav: int
-popis: char(X)
-lhuta: int
-lhuta_where: int
-__
+class PrintStateType{
+- id: int
+- description: string
 }
 
-class typ_akce{
-id_akce: int
-popis_akce: char(X)
-__
+class PrintTransition{
+- id: int
+- from_state: PrintState
+- to_state: PrintState
+- action: PrintTransitionType
 }
 
-class prechody{
-id_prechod: int
-odkud: int
-kam: int
-id_akce: int
-typ_prechodu: int
-__
+class PrintTransitionType{
+- id: int
+- description: string
 }
 
-class tisky {
-id_tisk: int
-id_druh: int
-id_stav: int
-ct: int
-cislo_za: int
-id_navrh: int
-id_org: int
-id_org_obd: int
-id_osoba: int
-navrhovatel: char(X)
-nazev_tisku: char(X)
-predlozeno: datum
-rozeslano: datum
-dal: datetime(year to minute)
-tech_nos_dat: date
-uplny_nazev_tisku: char(X)
-zm_lhuty: int
-lhuta: int
-rj: int
-t_url: char(X)
-is_eu: int
-roz: datetime(year to minute)
-is_sdv: int
-status: int
-__
+class Proposer {
+- id: int
+- print: Print
+- person: Person
+- index: int
+- type: int
+- proposer_type: string
 }
 
-class hist{
-id_hist: int
-datum: datetime(year to minute)
-id_hlas: int
-id_bod: int
-schuze: int
-usnes_ps: int
-orgv_id_posl: int
-ps_id_posl: int
-orgv_p_usn: int
-zaver_publik: date
-zaver_sb_castka: int
-zaver_sb_cislo: int
-poznamka: char(X)
-__
+class PropositionHistory{
+- id: int
+- print: Print
+- date: Date
+- voting: Voting
+- transition: PrintTransition
+- meeting_point: MeetingPoint
+- meeting_number: int
+- act_number: int
+- responsible_person_by_council: MemberOfParliament
+- responsible_by_chairman: MemberOfParliament
+- act_number_council: int
+- date_of_publication: Date
+- publication_number: int
+- notes: String
 }
 
-class hist_vybory{
-id_tisku: int
-id_organ: int
-typ: int
-id_hist: int
-id_posl: int
-poradi: int
-__
+class PrintResult{
+- id: int
+- description: string
 }
 
-class vysledek{
-id_vysledek: int
-druh_vysledek: char(X)
-__
+class PrintDependent{
+- id: int
+- type: PrintType
+- number_after_slash: int
+- proposition_history: PropositionHistory
+- name: string
+- name_full: string
+- number: int
+- authority: Authority
+- act_number_council: int/string
+- responsible_person: MemberOfParliament
+- date_of_propose: Date
+- date_of_deliver: Date
+- is_sorted: boolean
+- url: string
+- result: PrintResult
+- state: int
 }
 
-class tisky_za{
-id_tisk: int
-cislo_za: int
-id_hist: int
-id_druh: int
-nazev_za: char(X)
-uplny_nazev_zua: char(X)
-rozeslano: datetime(year to minute)
-id_org: int
-usn_vybor: int
-t_url: char(X)
-id_vysledek: int
-cislo_za_post: int
-sort_it: int
-roz: datetime(year to minute)
-status: int
-__
+class CouncilHistory {
+- print: Print
+- authority: Authority
+- type: int
+- proposition_history: PropositionHistory
+- responsible_person: MemberOfParliament
+- index: int
 }
 
-class predkladatel{
-id_tisk: int
-poradi: int
-typ: int
-__
-}
-
-stavy --> "id_typ: int" typ_stavu
-stavy --> "id_druh: int" druh_tisku
-prechody --> "odkud id_stav: int" stavy
-prechody --> "kam id_stav: int" stavy
-prechody --> "id_akce: int" typ_akce
-tisky --> "id_druh: int" druh_tisku
-tisky --> "id_stav: int" stavy
-tisky --> "id_typ: int" typ_zakon
-tisky --> "id_org: int" organy
-tisky --> "id_org_obd:int" organy
-tisky --> "id_osoba: int" osoba
-hist --> "id_tisk: int" tisky
-hist --> "id_hlasovani: int" hl_hlasovani
-hist --> "id_prechod: int" prechody
-hist --> "id_bod": int i_bod_schuze
-hist --> "orgv_id_pos: int" poslanec
-hist --> "ps_id_posl: int" poslanec
-tisky_za --> "id_hist: int" hist_vybory
-tisky_za --> "id_druh: int" druh_tisku
-tisky_za --> "id_org: int" hist_vybory
-tisky_za --> "id_posl: int" poslanec
-tisky_za --> "id_vysledek: int" vysledek
-predkladatel --> "id_osoba: int" osoba
-
-class osoba{
-}
-note right: Triedy bez atribútov sú z iných častí
-
+Print "*" --> "1" PrintType : type >
+Print "*" --> "1" PrintState : state >
+PrintState "*" --> "1" PrintStateType : state_type >
+PrintState "*" --> "1" PrintType : print_type >
+PrintTransition "*" --> "1" PrintState : from_state >
+PrintTransition "*" --> "1" PrintState : to_state >
+PrintTransition "*" --> "1" PrintTransitionType
+Person <--> Proposer
+Print <-- Proposer
+Print <-- PropositionHistory
+PropositionHistory --> Voting
+PropositionHistory --> PrintTransition
+PropositionHistory --> MeetingPoint
+PropositionHistory --> MemberOfParliament : responsible_person_by_council
+PropositionHistory --> MemberOfParliament : responsible_person_by_chairman
+PrintDependent --> PrintType
+PrintDependent --> PropositionHistory
+PrintDependent --> Authority
+PrintDependent --> MemberOfParliament : responsible_person
+PrintDependent --> PrintResult
+Print <-- CouncilHistory
+CouncilHistory --> Authority
+CouncilHistory --> PropositionHistory
+CouncilHistory --> MemberOfParliament
 @enduml
