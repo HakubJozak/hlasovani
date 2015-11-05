@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  degree_pre: MyString
+  degree_post: MyString
+  born_at: 2015-11-05
+  died_at: 2015-11-05
+  gender: MyString
+
+two:
+  first_name: MyString
+  last_name: MyString
+  degree_pre: MyString
+  degree_post: MyString
+  born_at: 2015-11-05
+  died_at: 2015-11-05
+  gender: MyString
