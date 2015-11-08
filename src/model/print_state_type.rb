@@ -1,8 +1,6 @@
-# CZ: Stav
+# CZ: Typ stavu
 class PrintStateType
-  # Keys
-  attr_accessor :id
-  attr_accessor :description
+  attr_accessor :id, :description
 
   def initialize(args = [])
     @id = args[:id_typ]

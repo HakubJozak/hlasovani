@@ -1,9 +1,6 @@
 # CZ: Prechody
 class PrintTransition
-  attr_accessor :id
-  attr_accessor :from_state # see PrintState
-  attr_accessor :to_state # see PrintState
-  attr_accessor :action # see PrintTransitionType, Typ přechodu; 1 - dle aktuálního jednacího řádu, 2 - staré jednací řády, 3 - vyjímky a speciální přechody
+  attr_accessor :id, :from_state, :to_state, :action, :transition_type
 
   # typ_prechodu
   def initialize(args = [])
@@ -11,5 +8,6 @@ class PrintTransition
     @from_state = args[:from_state]
     @to_state = args[:to_state]
     @action = args[:id_akce]
+    @transition_type = args[:typ_prechodu]
   end
 end

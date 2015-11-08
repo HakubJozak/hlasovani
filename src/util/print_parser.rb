@@ -9,12 +9,14 @@ load '../model/print_transition.rb'
 load '../model/print_transition_type.rb'
 load '../model/print_type.rb'
 load '../model/proposer.rb'
+load '../model/proposer_type.rb'
 load '../model/proposition_history.rb'
 
 class PrintParser
   attr_accessor :council_history, :print, :print_dependent,
                 :print_result, :print_state, :print_state_type, :print_transition,
-                :print_transition_type, :print_type, :proposer, :proposition_history
+                :print_transition_type, :print_type, :proposer, :proposer_type,
+                :proposition_history
 
   def initialize
     @files = {
@@ -28,7 +30,7 @@ class PrintParser
       print_dependent: '../../data/tisky_za.unl',
       print_transition_type: '../../data/typ_akce.unl',
       print_state_type: '../../data/typ_stavu.unl',
-      law_type: '../../data/typ_zakon.unl',
+      proposer_type: '../../data/typ_zakon.unl',
       print_result: '../../data/vysledek.unl'
     }
     @headers = {
@@ -42,7 +44,7 @@ class PrintParser
       print_dependent: %w'id_tisk cislo_za id_hist id_druh nazev_za uplny_nazev_za rozeslano id_org usn_vybor id_posl t_url id_vysledek cislo_za_post sort_it roz status',
       print_transition_type: %w'id_akce popis_akce',
       print_state_type: %w'id_typ popis_stavu',
-      law_type: %w'id_navrh druh_navrhovatele',
+      proposer_type: %w'id_navrh druh_navrhovatele',
       print_result: %w'id_vysledek druh_vysledek'
     }
     @council_history = []
@@ -55,6 +57,7 @@ class PrintParser
     @print_transition_type = []
     @print_type = []
     @proposer = []
+    @proposer_type = []
     @proposition_history = []
   end
 
@@ -63,7 +66,6 @@ class PrintParser
     results = {}
     @files.each do |key, filename| # insert headers and parse
       p "Parsing #{filename}"
-      # results[key] = SmarterCSV.process("#{filename}_tmp", force_simple_split: true, col_sep: '|', file_encoding: 'Windows-1250', verbose: true)
       results[key] = SmarterCSV.process(File.open(filename, 'r:Windows-1250'),
                                         force_simple_split: true,
                                         col_sep: '|',
@@ -116,6 +118,10 @@ class PrintParser
 
     results[:proposer].each do |args|
       @proposer << Proposer.new(args)
+    end
+
+    results[:proposer_type].each do |args|
+      @proposer_type << ProposerType.new(args)
     end
 
     results[:proposition_history].each do |args|
