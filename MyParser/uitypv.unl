@@ -1,0 +1,11 @@
+1|prednesena, doplnujici otazka|101|
+2|prednesena, bez doplnujici otazky|102|
+3|prednesena, interpelovany nepritomen|201|
+4|neprednesena, interpelujici nepritomen|301|
+5|neprednesena, vzata zpet|401|
+6|neprednesena, propadla|501|
+7|prednesena, odpoved pisemne|103|
+8|neprednesena, neznamo|302|
+9|neprednesena, pisemne|303|
+10|neprednesena, zruseny|304|
+11|neprednesena, omluvena|305|
