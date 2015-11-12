@@ -8,7 +8,7 @@ class CreatePeople < ActiveRecord::Migration
       t.date :born_at
       t.date :died_at
       t.string :gender
-      t.integer :old_id
+      t.integer :artificial_id
 
       t.timestamps null: false
     end
