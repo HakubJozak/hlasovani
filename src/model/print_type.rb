@@ -1,8 +1,6 @@
 # CZ: Druh tisku
 class PrintType
-  attr_accessor :id
-  attr_accessor :name # Název druhu tisku
-  attr_accessor :name_abbr # Skratka druhu: T = "hlavní tisk", Z = "následný tisk", X = "historické druhy tisku"
+  attr_accessor :id, :name, :name_abbr
 
   def initialize(args = [])
     @id = args[:id_druh]

@@ -1,9 +1,7 @@
 # CZ: Vysledek
 class PrintResult
-  attr_accessor :id
-  attr_accessor :description
+  attr_accessor :id, :description
 
-  # id_vysledek druh_vysledek
   def initialize(args = [])
     @id = args[:id_vysledek]
     @description = args[:druh_vysledek]
